@@ -1,0 +1,115 @@
+//some of these base styles were adapted from a css grid lesson from a wes bos course:
+//http://cssgrid.io
+
+//color variables
+
+:root {
+	--yellow: #ffffbf;
+	--black: #272727;
+	--green: #bfffbf;
+	--pink: #ffbfff;
+	--purple: #bfbfff;
+	--blue: #bfffff;
+	--bright_red: #f93d66;
+	--state_red: #fb87a1;
+	--bright_purple: #6d47d9;
+	--city_yellow: #ffc800;
+	--ibu_red: #b44663;
+	--abv_blue: steelblue;
+	--beer_brown: #c06018;
+	--gray: #ededed;
+	--off_white: #f8f8ff;
+}
+
+html {
+	/* border-box box model allows us to add padding and border to our elements without increasing their size */
+	box-sizing: border-box;
+	/* A system font stack so things load nice and quick! */
+	font-family: sans-serif;
+	font-weight: 900;
+	font-size: 12px;
+	color: var(--black);
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	height: 100%;
+	margin: 2rem 0;
+	letter-spacing: -.5px;
+	overflow-x: hidden;
+	background: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 5px 0;
+}
+
+.header_title {
+	background: black;
+	color: white;
+	text-align: center;
+	padding: 1rem;
+}
+/* Each item in our grid will contain numbers */
+.item {
+	/* We center the contents of these items. You can also do this with flexbox too! */
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	border: 5px solid rgba(0, 0, 0, 0.01);
+	border-radius: 2px;
+	font-size: 3.2rem;
+}
+
+.item p {
+	margin: 0 0 6px 0;
+}
+
+path {
+	cursor: pointer;
+}
+
+//this was the only way I could turn the circles back to yellow when a state was hovered over
+//i tried to get it to work in D3 but was having problems
+
+path:hover ~ .city {
+	fill: var(--city_yellow) !important;
+}
+
+//////@at-root
+
+.node {
+	@for $i from 1 through 30 {
+		&:nth-child(#{$i}) .graph {
+			$delay: $i * 0.075s;
+			animation-delay: $delay;
+		}
+	}
+}
+
+.graph {
+	opacity: 0;
+	animation-name: animateIn;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes animateIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.6) rotate(-15deg);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1) rotate(0);
+	}
+}

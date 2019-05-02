@@ -1,0 +1,273 @@
+//google font import
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+@mixin boxShadow {
+	box-shadow: 0 0px 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+//styles for overall container
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr); //2 columns of equal width
+	grid-template-rows: auto 2fr 2fr; /* 3 rows */
+	grid-template-areas: ". text_container text_container text_container text_container ."
+		"map_container map_container map_container map_container histograms histograms"
+		"plot_container plot_container plot_container plot_abv plot_abv plot_abv ";
+	grid-gap: 11px;
+	margin: auto 7.5%;
+}
+
+//styles for text container
+
+.text_container {
+	grid-area: text_container;
+	// background: var(--gray);
+	padding: 2% 10%;
+	border-radius: 3px;
+	@include boxShadow;
+
+	.text_title {
+		margin-bottom: 5%;
+		line-height: 1;
+		margin-top: 5%;
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-align: center;
+		font-size: 3em;
+	}
+
+	h1 {
+		font-size: 6em;
+	}
+
+	h3 {
+		font-family: 'Crimson Text', 'Georgia', serif;
+		margin-top: 2%;
+	}
+
+	p {
+		font-size: 2em;
+		font-family: 'Crimson Text', 'Georgia', serif;
+		text-shadow: none;
+	}
+}
+
+.craft_definition {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	place-items: center center;
+
+	div {
+		font-size: 3em;
+		color: black;
+	}
+}
+
+//styles for map container
+.map_container {
+	display: grid;
+	grid-area: map_container;
+	grid-gap: 10px;
+	grid-template-rows: 1fr 5fr;
+	grid-template-areas: "map_info" "map";
+}
+
+//styles for map directions
+
+.map_info {
+	grid-area: map_info;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	justify-items: center;
+	@include boxShadow;
+	background: var(--off_white);
+
+	div {
+		border: none;
+		font-size: 2rem;
+		text-align: center;
+		background: var(--off_white);
+	}
+}
+
+.select_state span {
+	padding-top: 10px;
+	font-size: 16px;
+}
+
+.select_city div {
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+.select_city {
+	display: block;
+}
+
+//the actual map
+
+.map {
+	grid-area: map;
+	border: none;
+	@include boxShadow;
+	background: var(--off_white);
+	padding: none;
+}
+
+//scatterplot styles
+
+.plot_container {
+	grid-area: plot_container;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-rows: .1fr 1fr;
+	grid-template-areas: "scatter_plot" "scatterplot";
+}
+.plot_container-1 {
+	grid-area: plot_abv;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-rows: .1fr 1fr;
+	grid-template-areas: "scatter_plot-1" "scatterplot-1";
+}
+
+.scatter_info {
+	font-size: 1.75rem;
+	@include boxShadow;
+}
+
+.scatterplot {
+	grid-area: scatterplot;
+	@include boxShadow;
+}
+
+//histogram styles
+
+.histograms {
+	grid-area: histograms;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-rows: auto 4fr auto 4fr;
+	grid-template-areas: "abv_info" "abv" "ibu_info" "ibu";
+}
+
+.abv_info {
+	grid-area: abv_info;
+	font-size: 1.75rem;
+	display: inline;
+	text-align: center;
+	@include boxShadow;
+}
+
+.abv {
+	grid-area: abv;
+	@include boxShadow;
+}
+
+.ibu_info {
+	grid-area: ibu_info;
+	font-size: 1.75rem;
+	display: inline;
+	text-align: center;
+	@include boxShadow;
+}
+
+.ibu {
+	grid-area: ibu;
+	@include boxShadow;
+}
+
+.chartSubtitle {
+	font-size: .5em;
+	// letter-spacing: 1px;
+}
+
+.ibuDesc {
+	font-size: .25em;
+	// letter-spacing: 1px;
+}
+//||||||||||||||||||||||||||||||||||||||
+//|||||||||| MOBILE |||||||||||||||||||
+//||||||||||||||||||||||||||||||||||||||
+@media (max-width: 787px) {
+	.container {
+		grid-template-rows: auto .5fr .5fr .75fr;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas: "text_container text_container" "map_container map_container"
+			"plot_container plot_container" "histograms histograms";
+		// height: 600px;
+		margin: 0 auto;
+	}
+
+	.map_container {
+		grid-template-rows: auto 3fr;
+		grid-template-areas: "map_info" "map";
+	}
+
+	.map_info {
+		grid-area: map_info;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		/* justify-content: center; */
+		/* font-size: 10px; */
+		justify-items: center;
+		@include boxShadow;
+		background: var(--off_white);
+
+		div {
+			border: none;
+			font-size: .25em;
+			text-align: center;
+			background: var(--off_white);
+		}
+	}
+
+	.select_state span {
+		padding-top: 10px;
+		font-size: 16px;
+	}
+
+	.select_city div {
+		padding-top: 10px;
+		font-size: 12px;
+	}
+
+	.select_city {
+		display: block;
+	}
+
+	.plot_container {
+		grid-template-rows: 1fr 3fr;
+		grid-template-areas: "scatter_info" "scatterplot";
+	}
+
+	.histograms {
+		grid-template-rows: 1fr 3fr 1fr 3fr;
+		grid-template-areas: "abv_info" "abv" "ibu_info" "ibu";
+	}
+
+	.text_container {
+		.text_title > * {
+			margin-bottom: 10%;
+		}
+
+		.craft_definition {
+			display: block;
+		}
+
+		h1 {
+			font-size: 3em;
+		}
+
+		h2 {
+			font-size: 2em;
+		}
+
+		.craft_category {
+			font-size: 2.5em;
+		}
+	}
+}
